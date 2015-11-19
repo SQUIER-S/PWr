@@ -37,11 +37,7 @@ public class MyArrayList<E> {
      * @return  - size of an array list
      */
     public int size() {
-<<<<<<< HEAD
-            return size;
-=======
         return size;
->>>>>>> 3607f35265e29804e6309e31a20f2ede0d6c6590
     }
 
     /**
@@ -52,11 +48,8 @@ public class MyArrayList<E> {
 
     /**
      * Adds element at the end of the array list.
-<<<<<<< HEAD
      * Enlarges capacity by DEFAULT_CAPACITY if needed
-=======
      * Enlarges capacity if needed
->>>>>>> 3607f35265e29804e6309e31a20f2ede0d6c6590
      * @param element   - element to be added
      */
     public void add(E element) {
