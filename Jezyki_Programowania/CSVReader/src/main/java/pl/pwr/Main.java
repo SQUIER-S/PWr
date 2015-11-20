@@ -6,10 +6,7 @@ import pl.pwr.service.CSVCreator;
 import pl.pwr.service.CSVLoader;
 import pl.pwr.validators.DataValidator;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * Created by SQUIER on 2015-11-19.
@@ -24,11 +21,11 @@ public class Main {
 
         DataValidator dataValidator = new DataValidator();
         AirportFactory airportFactory = new AirportFactory();
+        CSVCreator csvCreator = new CSVCreator();
 
         try {
             dataValidator.validateData(CSVLoader.csvFileToStringArray(cf.getProperty("pathToCSVFile")));
             airportFactory.createAirports(dataValidator.getGoodData());
-            CSVCreator csvCreator = new CSVCreator();
             csvCreator.createCSVFiles(airportFactory.getAirports(),
                     cf.getProperty("outputFileName"),
                     Integer.parseInt(cf.getProperty("rowsPerFile")));

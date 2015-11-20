@@ -28,14 +28,15 @@ public class CSVCreator {
         List< List<Airport> > splitData = FileDivider.divideFileIntoParts(data, rowsPerFile);
 
         splitData.stream()
-                .forEach(list -> list.stream().forEach(element -> {
-                    try {
-                        Files.write(Paths.get(fileName + suffix + generateFileNumber() + ".csv"),
-                                (element.toString()+"\n").getBytes(), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }));
+                .forEach(list -> list.stream()
+                        .forEach(element -> {
+                            try {
+                                Files.write(Paths.get(fileName + suffix + generateFileNumber() + ".csv"),
+                                        (element.toString()+"\n").getBytes(), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }));
 
 
     }

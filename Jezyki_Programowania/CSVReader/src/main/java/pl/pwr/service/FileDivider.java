@@ -35,7 +35,7 @@ public class FileDivider {
 
     private static int checkEnd(List<Airport> data, int rowsPerFile, int end) {
         if(end + rowsPerFile < data.size()) end += rowsPerFile;
-        else end = data.size() - 1;
+        else end = data.size();
         return end;
     }
 
