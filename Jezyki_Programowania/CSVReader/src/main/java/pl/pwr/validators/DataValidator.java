@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class DataValidator {
 
     private ArrayList<String[]> goodData;
-    private ArrayList<String[]> badData;
+    private ArrayList<String> badData;
 
     public DataValidator() {
         goodData = new ArrayList<>();
@@ -34,12 +34,23 @@ public class DataValidator {
                         .collect(Collectors.toList())
         );
 
+
         badData.addAll(
                 validation.stream()
-                        .filter(element -> element.length != 2)
-                        .filter(element -> element[0].length() != 3)
+                        .filter(element -> element[0].length() != 3 || element.length != 2)
                         .collect(Collectors.toList())
+                            .stream()
+                            .map(element -> {
+
+                                String newString = "";
+                                for (String anElement : element) {
+                                    newString += anElement + ",";
+                                }
+                                return newString.substring(0, newString.length()-1);
+                            })
+                            .collect(Collectors.toList())
         );
+
 
         return badData.size();
     }
@@ -48,7 +59,7 @@ public class DataValidator {
         return goodData;
     }
 
-    public ArrayList<String[]> getBadData() {
+    public ArrayList<String> getBadData() {
         return badData;
     }
 }
