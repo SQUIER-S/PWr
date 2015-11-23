@@ -1,4 +1,4 @@
-package pl.pwr.service;
+package pl.pwr.validators;
 
 import pl.pwr.data.Airport;
 

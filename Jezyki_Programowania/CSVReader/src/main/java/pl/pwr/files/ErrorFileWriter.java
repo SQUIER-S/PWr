@@ -1,4 +1,4 @@
-package pl.pwr.service;
+package pl.pwr.files;
 
 import java.io.IOException;
 import java.nio.file.Files;

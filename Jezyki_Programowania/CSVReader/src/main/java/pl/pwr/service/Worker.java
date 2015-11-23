@@ -1,10 +1,16 @@
 package pl.pwr.service;
 
 import pl.pwr.config.ConfigService;
-import pl.pwr.factories.AirportFactory;
+import pl.pwr.data.AirportFactory;
+import pl.pwr.files.CSVWriter;
+import pl.pwr.files.ErrorFileWriter;
+import pl.pwr.files.FileReader;
 import pl.pwr.validators.DataValidator;
+import pl.pwr.validators.DuplicatesRemover;
 
 import java.io.IOException;
+
+import static pl.pwr.config.Keys.*;
 
 /**
  * Created by SQUIER on 2015-11-20.
@@ -27,7 +33,7 @@ public class Worker {
 
     public void start() throws IOException {
         /*Validate input data*/
-        dataValidator.validateData(CSVLoader.csvFileToStringArray(config.getProperty("pathToCSVFile")));
+        dataValidator.validateData(FileReader.fileToStringArray(config.getProperty(PATH_TO_FILE)));
 
         /*Create objects from valid data*/
         airportFactory.createAirports(dataValidator.getGoodData());
@@ -37,11 +43,11 @@ public class Worker {
 
         /*Write new .csv files with good data*/
         csvWriter.createCSVFiles(duplicatesRemover.getDifferentAirports(),
-                config.getProperty("outputFileName"),
-                Integer.parseInt(config.getProperty("rowsPerFile")));
+                config.getProperty(OUTPUT_FILENAME),
+                Integer.parseInt(config.getProperty(ROWS_PER_FILE)));
 
         /*Write errors*/
-        ErrorFileWriter.writeErrors(dataValidator.getBadData(), config.getProperty("errors"));
+        ErrorFileWriter.writeErrors(dataValidator.getBadData(), config.getProperty(ERRORS_FILENAME));
 
     }
 

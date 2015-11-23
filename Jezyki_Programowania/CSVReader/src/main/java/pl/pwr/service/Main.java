@@ -1,4 +1,4 @@
-package pl.pwr;
+package pl.pwr.service;
 
 import pl.pwr.config.ConfigService;
 import pl.pwr.service.Worker;

@@ -1,6 +1,4 @@
-package pl.pwr.factories;
-
-import pl.pwr.data.Airport;
+package pl.pwr.data;
 
 import java.util.ArrayList;
 import java.util.List;
