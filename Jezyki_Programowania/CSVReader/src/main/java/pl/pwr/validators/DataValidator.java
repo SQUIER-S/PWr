@@ -39,16 +39,16 @@ public class DataValidator {
                 validation.stream()
                         .filter(element -> element[0].length() != 3 || element.length != 2)
                         .collect(Collectors.toList())
-                            .stream()
-                            .map(element -> {
+                        .stream()
+                        .map(element -> {
 
-                                String newString = "";
-                                for (String anElement : element) {
-                                    newString += anElement + ",";
-                                }
-                                return newString.substring(0, newString.length()-1);
-                            })
-                            .collect(Collectors.toList())
+                            String newString = "";
+                            for (String anElement : element) {
+                                newString += anElement + ",";
+                            }
+                            return newString.substring(0, newString.length() - 1);
+                        })
+                        .collect(Collectors.toList())
         );
 
 

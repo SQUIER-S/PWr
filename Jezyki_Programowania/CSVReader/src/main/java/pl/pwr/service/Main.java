@@ -1,7 +1,6 @@
 package pl.pwr.service;
 
 import pl.pwr.config.ConfigService;
-import pl.pwr.service.Worker;
 
 import java.io.IOException;
 

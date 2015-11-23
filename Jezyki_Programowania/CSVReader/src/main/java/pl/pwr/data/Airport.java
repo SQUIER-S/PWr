@@ -3,7 +3,7 @@ package pl.pwr.data;
 /**
  * Created by SQUIER on 2015-11-19.
  */
-public class Airport implements Comparable<Airport>{
+public class Airport implements Comparable<Airport> {
 
     private String code;
     private String name;
@@ -55,8 +55,8 @@ public class Airport implements Comparable<Airport>{
 
     @Override
     public int compareTo(Airport o) {
-        if(this.name.equals(o.name) && this.code.equals(o.code)) return 0;
-        else if(this.code.compareToIgnoreCase(o.code) > 0) return 1;
+        if (this.name.equals(o.name) && this.code.equals(o.code)) return 0;
+        else if (this.code.compareToIgnoreCase(o.code) > 0) return 1;
         else return -1;
     }
 }

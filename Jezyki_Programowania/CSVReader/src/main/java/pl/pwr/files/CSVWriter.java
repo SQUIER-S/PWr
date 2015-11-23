@@ -22,7 +22,8 @@ public class CSVWriter {
     private int numberOfFiles = 0;
     private boolean last = false;
 
-    public CSVWriter() {}
+    public CSVWriter() {
+    }
 
     public void createCSVFiles(HashSet<Airport> data, String fileName, int rowsPerFile) {
 
@@ -33,12 +34,12 @@ public class CSVWriter {
 
         linesToWrite = listData.size();
         numberOfFiles =
-                (listData.size() % rowsPerFile != 0) ? (listData.size()/rowsPerFile) + 1 : (listData.size()/rowsPerFile);
+                (listData.size() % rowsPerFile != 0) ? (listData.size() / rowsPerFile) + 1 : (listData.size() / rowsPerFile);
 
         listData.forEach(element -> {
             try {
                 Files.write(Paths.get(fileName + generateSuffix(rowsPerFile)),
-                        (element.toString()+"\n").getBytes(),
+                        (element.toString() + "\n").getBytes(),
                         StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -49,15 +50,15 @@ public class CSVWriter {
 
     private String generateSuffix(int rowsPerFile) {
 
-        if(linesToWrite <= rowsPerFile && !last) {
+        if (linesToWrite <= rowsPerFile && !last) {
             return "_" + linesToWrite + "_1.csv";
 
-        } else if(rowsInFile == rowsPerFile && !last) {
+        } else if (rowsInFile == rowsPerFile && !last) {
             fileNumber++;
             rowsInFile = 1;
-            if(numberOfFiles == fileNumber) {
+            if (numberOfFiles == fileNumber) {
                 last = true;
-                return "_" + (linesToWrite - (fileNumber-1)*rowsPerFile) + "_" + fileNumber + ".csv";
+                return "_" + (linesToWrite - (fileNumber - 1) * rowsPerFile) + "_" + fileNumber + ".csv";
             }
             return "_" + rowsPerFile + "_" + fileNumber + ".csv";
 
@@ -66,7 +67,7 @@ public class CSVWriter {
             return "_" + rowsPerFile + "_" + fileNumber + ".csv";
 
         }
-        return "_" + (linesToWrite - (fileNumber-1)*rowsPerFile) + "_" + fileNumber + ".csv";
+        return "_" + (linesToWrite - (fileNumber - 1) * rowsPerFile) + "_" + fileNumber + ".csv";
     }
 
 }

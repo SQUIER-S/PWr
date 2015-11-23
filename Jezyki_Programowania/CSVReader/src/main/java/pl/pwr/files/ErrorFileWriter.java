@@ -15,7 +15,7 @@ public class ErrorFileWriter {
 
         errors.forEach(error -> {
             try {
-                Files.write(Paths.get(fileName), (error+"\n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                Files.write(Paths.get(fileName), (error + "\n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             } catch (IOException e) {
                 e.printStackTrace();
             }
