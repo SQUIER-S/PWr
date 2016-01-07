@@ -1,0 +1,24 @@
+.root {
+    -fx-background-color: linear-gradient(#323232, #121212);
+}
+
+.controlButtons {
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-border-color: rgba(0, 0, 0, 0);
+    -fx-border-radius: 0em;
+    -fx-background-radius: 0em;
+
+    -fx-min-height: 15px;
+    -fx-max-height: 15px;
+    -fx-max-width: 20px;
+    -fx-min-width: 20px;
+
+    -fx-text-fill: #cccccc;
+    -fx-font-size: 10px;
+}
+
+.label {
+    -fx-text-fill: #cccccc;
+    -fx-font-size: 14px;
+    -fx-font-family: CALIBRI;
+}

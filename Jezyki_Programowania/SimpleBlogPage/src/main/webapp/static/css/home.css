@@ -1,0 +1,105 @@
+body {
+    background: url("../images/main-bg-img.jpg") no-repeat;
+    margin: 0px;
+    margin-top: -21px !important;
+}
+
+.main_container {
+    height: 1080px;
+    width: 100%;
+    margin: 21px 0px 0px 0px;
+}
+
+.navigation {
+    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.8), rgba(255,255,255,0.7));
+    height: 75px;
+    width: 100%;
+}
+
+.menu {
+    float: left;
+    padding: 0px 0px 0px 1220px;
+}
+
+.logo {
+    float: left;
+    width: 300px;
+    height: 75px;
+    background-image: url("../images/logo.png");
+}
+
+.option:hover {
+    color: #1286FF;
+    cursor: pointer;
+}
+
+.option {
+    float: left;
+    height: 75px;
+    width: 160px;
+    font-size: 21px;
+    padding: 24px 10px 0px 10px;
+    text-align: center;
+    font-family: CALIBRI;
+    transition: color 0.5s;
+}
+
+.hello-box {
+    width: 750px;
+    height: 460px;
+    background-color: rgba(0,0,0,0.75);
+    margin: 150px auto auto;
+    border-radius: 20px;
+    padding: 25px 15px 25px 15px;
+    text-align: center;
+    z-index: 2;
+    color: white;
+    font-family: Verdana;
+}
+
+.hello-box h1 {
+    font-size: 35px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+}
+
+.hello-box .sub-header {
+    font-size: 24px;
+    letter-spacing: -0.1px;
+    line-height: 1;
+    font-weight: 100 !important;
+}
+
+#loginForm {
+    background: rgba(255,255,255,0.7);
+    position: fixed;
+    margin-left: 1550px;
+    width: 200px;
+    height: 160px;
+    padding: 10px;
+    display: none;
+}
+
+.hello-box .register {
+    font-size: 24px;
+}
+
+#registrationForm {
+    padding: 50px;
+    display: none;
+}
+
+.regTable {
+    color: white;
+    width: 650px;
+}
+
+.choice-table {
+    padding: 50px !important;
+}
+
+.choices {
+    color: white;
+    width: 650px;
+    text-align: center;
+}

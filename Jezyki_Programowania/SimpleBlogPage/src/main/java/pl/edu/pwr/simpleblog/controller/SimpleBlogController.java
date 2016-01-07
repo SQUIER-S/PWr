@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SimpleBlogController {
 
     @RequestMapping("/")
-    public String init() {
+    public String mainPage() {
         return "index";
     }
 
