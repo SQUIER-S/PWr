@@ -69,4 +69,8 @@ public class MultipleTextArea {
     public VBox getRightBox() {
         return rightBox;
     }
+
+    public void setLeftText(String leftText) { left.setText(leftText); }
+
+    public void setRightText(String rightText) { right.setText(rightText); }
 }
