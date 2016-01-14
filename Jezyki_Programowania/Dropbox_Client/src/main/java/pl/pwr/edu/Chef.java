@@ -3,6 +3,7 @@ package pl.pwr.edu;
 import pl.pwr.edu.controller.AppController;
 import pl.pwr.edu.observers.DirectoryObserver;
 import pl.pwr.edu.service.DirContent;
+import pl.pwr.edu.service.WaitForDirContent;
 import pl.pwr.edu.view.main.AppGUI;
 
 import java.io.File;
@@ -17,7 +18,8 @@ public class Chef {
     private AppController appController;
 
     /*Managers*/
-    private DirectoryObserver dirObserver;
+    private DirectoryObserver dirObserver = null;
+    private Thread observeDir;
     /*Workers*/
     private DirContent dirContent;
 
@@ -30,8 +32,6 @@ public class Chef {
         appController = new AppController(appGUI, this);
         appController.startAppController();
 
-        Thread waitForWorker = new Thread(new WaitForDirContent());
-        waitForWorker.start();
 
     }
 
@@ -39,24 +39,17 @@ public class Chef {
         this.dirContent = dirContent;
     }
 
+    public DirContent getDirContent() { return dirContent; }
+
     public AppController getAppController() {
         return appController;
     }
 
-    private void setDirObserver() {
-        dirObserver = new DirectoryObserver(dirContent, this);
-    }
+    public void setDirObserver() { dirObserver = new DirectoryObserver(dirContent, this); }
 
-    private class WaitForDirContent implements Runnable {
+    public DirectoryObserver getDirObserver() { return dirObserver; }
 
-        @Override
-        public void run() {
-            while(dirContent == null) {/*wait for initialization*/}
-            /* Start observing selected directory */
-            setDirObserver();
-            Thread observeDir = new Thread(dirObserver);
-            observeDir.start();
-        }
-    }
+    public void setObserveDir(Thread thread) { observeDir = thread;}
 
+    public Thread getObserveDir() { return observeDir; }
 }

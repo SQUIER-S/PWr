@@ -1,8 +1,9 @@
 package pl.pwr.edu.controller;
 
 import pl.pwr.edu.Chef;
-import pl.pwr.edu.observers.DirectoryObserver;
+import pl.pwr.edu.service.DirChooser;
 import pl.pwr.edu.service.DirContent;
+import pl.pwr.edu.service.WaitForDirContent;
 import pl.pwr.edu.view.controller.FoundFilesUpdater;
 import pl.pwr.edu.view.controller.MovableWindowController;
 import pl.pwr.edu.view.main.AppGUI;
@@ -26,10 +27,22 @@ public class AppController {
         initMovableWindow();
         initControlButtons();
         initDirChooser();
+        initWaitThread();
     }
 
     public void updateFoundFiles(ArrayList<String> list) {
         FoundFilesUpdater.updateFoundFiles(appGUI.getFileList().getLeft(), list);
+    }
+
+    public void observeDirectory() {
+        chef.setDirObserver();
+        chef.setObserveDir(new Thread(chef.getDirObserver()));
+        chef.getObserveDir().start();
+    }
+
+    private void initWaitThread() {
+        Thread waitForDirContent = new Thread(new WaitForDirContent(chef));
+        waitForDirContent.start();
     }
 
     private void initMovableWindow() {
@@ -42,7 +55,15 @@ public class AppController {
 
     private void initDirChooser() {
         appGUI.getChooseDir().setOnMouseClicked(e -> {
-                chef.setDirContent(new DirContent(new DirChooser(appGUI.getStage()).chooseDir()));
+                if(chef.getDirObserver() == null) {
+                    chef.setDirContent(new DirContent(new DirChooser(appGUI.getStage()).chooseDir()));
+                    /*Another thread waits to initialize dirContent object, when it happens, thread calls appController
+                        that it can start observing directory for changes*/
+                } else if(chef.getDirObserver() != null) {
+                    chef.getDirObserver().setObserving(false);
+                    chef.setDirContent(new DirContent(new DirChooser(appGUI.getStage()).chooseDir()));
+                    observeDirectory();
+                }
         });
 
     }

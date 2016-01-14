@@ -13,7 +13,10 @@ public class FoundFilesUpdater {
         textArea.setText("");
         list.forEach(element -> textArea.appendText(element+"\n"));
 
+        textArea.setEditable(true);
         textArea.deletePreviousChar();
+        textArea.positionCaret(0);
+        textArea.setEditable(false);
 
     }
 

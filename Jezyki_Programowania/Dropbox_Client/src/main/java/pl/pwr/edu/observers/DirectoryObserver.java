@@ -20,14 +20,19 @@ public class DirectoryObserver implements Runnable {
     /*Communicating with Chef class*/
     private Chef chef;
 
+    /*rather to stop observing*/
+    private boolean observing = true;
+
     public DirectoryObserver(DirContent dirContent, Chef chef) {
         this.dirContent = dirContent;
         this.chef = chef;
     }
 
+    public void setObserving(boolean value) { observing = value; }
+
     @Override
     public void run() {
-        while (true) {
+        while (observing) {
             ArrayList<String> dirFiles = null;
             /* getting dir content */
             try {
@@ -36,7 +41,7 @@ public class DirectoryObserver implements Runnable {
                 e.printStackTrace();
             }
 
-            checkForIdentity(dirFiles);
+            updateView(dirFiles);
 
             /*get a rest*/
             try {
@@ -47,7 +52,7 @@ public class DirectoryObserver implements Runnable {
         }
     }
 
-    private void checkForIdentity(ArrayList<String> dirFiles) {
+    private void updateView(ArrayList<String> dirFiles) {
         if(files == null) {
             files = dirFiles;
             chef.getAppController().updateFoundFiles(dirFiles);

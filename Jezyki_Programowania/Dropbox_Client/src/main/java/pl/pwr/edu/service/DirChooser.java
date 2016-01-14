@@ -1,4 +1,4 @@
-package pl.pwr.edu.controller;
+package pl.pwr.edu.service;
 
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
