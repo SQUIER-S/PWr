@@ -3,6 +3,7 @@ package pl.pwr.edu.view.main;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -24,6 +25,7 @@ public class AppGUI {
     private CurrentDirectory currentDirectory;
     private MultipleTextArea fileList;
     private Button chooseDir;
+    private Button logIn;
 
     public AppGUI(Stage stage) {
         this.stage = stage;
@@ -37,16 +39,21 @@ public class AppGUI {
         controlButtons = new ControlButtons();
 
         currentDirectory = new CurrentDirectory();
-        currentDirectory.setDirLabel("Choose directory..");
+        currentDirectory.setDirLabel("Log in to your dropbox account");
         currentDirectory.getDirLabel().setStyle("-fx-font-size: 18px");
 
         fileList = new MultipleTextArea("Files found", "Statistics");
         fileList.initMultipleTextArea();
 
         chooseDir = new Button("Choose directory");
+        chooseDir.setDisable(true);
+        logIn = new Button("Log In");
+
+        HBox buttons = new HBox(215);
+        buttons.getChildren().addAll(chooseDir, logIn);
 
         main.getChildren().addAll(controlButtons.getControlButtons(), currentDirectory.getDirLabel(),
-                fileList.getMultipleTextArea(), chooseDir);
+                fileList.getMultipleTextArea(), buttons);
         VBox.setMargin(controlButtons.getControlButtons(), new Insets(-15, -15, 0, 0));
         VBox.setMargin(fileList.getMultipleTextArea(), new Insets(15, 25, 25, 25));
 
@@ -87,4 +94,6 @@ public class AppGUI {
     public CurrentDirectory getCurrentDirectory() {
         return currentDirectory;
     }
+
+    public Button getLogIn() { return logIn; }
 }

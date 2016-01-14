@@ -3,11 +3,13 @@ package pl.pwr.edu.controller;
 import pl.pwr.edu.Chef;
 import pl.pwr.edu.service.DirChooser;
 import pl.pwr.edu.service.DirContent;
+import pl.pwr.edu.service.LoginToDB;
 import pl.pwr.edu.service.WaitForDirContent;
 import pl.pwr.edu.view.controller.FoundFilesUpdater;
 import pl.pwr.edu.view.controller.MovableWindowController;
 import pl.pwr.edu.view.main.AppGUI;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 /**
@@ -28,6 +30,7 @@ public class AppController {
         initControlButtons();
         initDirChooser();
         initWaitThread();
+        initLogInButton();
     }
 
     public void updateFoundFiles(ArrayList<String> list) {
@@ -66,5 +69,15 @@ public class AppController {
                 }
         });
 
+    }
+
+    private void initLogInButton() {
+        appGUI.getLogIn().setOnMouseClicked(e -> {
+            try {
+                new LoginFormController(LoginToDB.getWebAuth()).startAuthorization();
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 }

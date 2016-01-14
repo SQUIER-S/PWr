@@ -4,6 +4,7 @@ import pl.pwr.edu.controller.AppController;
 import pl.pwr.edu.observers.DirectoryObserver;
 import pl.pwr.edu.service.DirContent;
 import pl.pwr.edu.service.WaitForDirContent;
+import pl.pwr.edu.view.login.LoginForm;
 import pl.pwr.edu.view.main.AppGUI;
 
 import java.io.File;
@@ -15,6 +16,7 @@ import java.net.MalformedURLException;
 public class Chef {
 
     private AppGUI appGUI;
+    private LoginForm loginForm = new LoginForm();
     private AppController appController;
 
     /*Managers*/
@@ -52,4 +54,5 @@ public class Chef {
     public void setObserveDir(Thread thread) { observeDir = thread;}
 
     public Thread getObserveDir() { return observeDir; }
+
 }
