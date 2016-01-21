@@ -3,14 +3,17 @@ package pl.pwr.edu.controller;
 import pl.pwr.edu.Chef;
 import pl.pwr.edu.service.DirChooser;
 import pl.pwr.edu.service.DirContent;
-import pl.pwr.edu.service.LoginToDB;
+import pl.pwr.edu.service.Executors;
 import pl.pwr.edu.service.WaitForDirContent;
 import pl.pwr.edu.view.controller.FoundFilesUpdater;
 import pl.pwr.edu.view.controller.MovableWindowController;
 import pl.pwr.edu.view.main.AppGUI;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 /**
  * Created by SQUIER on 2016-01-07.
@@ -30,11 +33,22 @@ public class AppController {
         initControlButtons();
         initDirChooser();
         initWaitThread();
-        initLogInButton();
     }
 
-    public void updateFoundFiles(ArrayList<String> list) {
+    public void updateFoundFiles(ArrayList<File> list) {
         FoundFilesUpdater.updateFoundFiles(appGUI.getFileList().getLeft(), list);
+    }
+
+    public void uploadFiles(ArrayList<File> list, HashSet<File> uploaded) {
+        HashSet<File> upload = new HashSet<>();
+        upload.addAll(list.stream().collect(Collectors.toList()));
+
+        upload.removeAll(uploaded);
+
+        if(upload.size() > 0) {
+            new Executors((upload.stream().collect(Collectors.toList()))).start();
+            uploaded.addAll(upload);
+        }
     }
 
     public void observeDirectory() {
@@ -59,25 +73,19 @@ public class AppController {
     private void initDirChooser() {
         appGUI.getChooseDir().setOnMouseClicked(e -> {
                 if(chef.getDirObserver() == null) {
-                    chef.setDirContent(new DirContent(new DirChooser(appGUI.getStage()).chooseDir()));
+                    String dir = new DirChooser(appGUI.getStage()).chooseDir();
+                    chef.setDirContent(new DirContent(dir));
                     /*Another thread waits to initialize dirContent object, when it happens, thread calls appController
                         that it can start observing directory for changes*/
+                    appGUI.getCurrentDirectory().setDirLabel(dir);
                 } else if(chef.getDirObserver() != null) {
                     chef.getDirObserver().setObserving(false);
-                    chef.setDirContent(new DirContent(new DirChooser(appGUI.getStage()).chooseDir()));
+                    String dir = new DirChooser(appGUI.getStage()).chooseDir();
+                    chef.setDirContent(new DirContent(dir));
+                    appGUI.getCurrentDirectory().setDirLabel(dir);
                     observeDirectory();
                 }
         });
 
-    }
-
-    private void initLogInButton() {
-        appGUI.getLogIn().setOnMouseClicked(e -> {
-            try {
-                new LoginFormController(LoginToDB.getWebAuth()).startAuthorization();
-            } catch (MalformedURLException e1) {
-                e1.printStackTrace();
-            }
-        });
     }
 }

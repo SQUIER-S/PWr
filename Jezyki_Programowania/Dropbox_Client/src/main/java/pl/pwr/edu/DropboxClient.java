@@ -2,7 +2,8 @@ package pl.pwr.edu;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pl.pwr.edu.view.login.LoginForm;
+import pl.pwr.edu.controller.StatsController;
+import pl.pwr.edu.service.Statistics;
 import pl.pwr.edu.view.main.AppGUI;
 
 
@@ -17,8 +18,11 @@ public class DropboxClient extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        new Chef(new AppGUI(stage));
-        new LoginForm();
+
+        Thread statController = new Thread(new StatsController(new Chef(new AppGUI(stage))));
+        statController.start();
+        Thread stats = new Thread(new Statistics());
+        stats.start();
     }
 
 

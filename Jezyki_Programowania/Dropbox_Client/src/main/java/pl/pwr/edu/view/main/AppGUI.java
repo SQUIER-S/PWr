@@ -25,7 +25,6 @@ public class AppGUI {
     private CurrentDirectory currentDirectory;
     private MultipleTextArea fileList;
     private Button chooseDir;
-    private Button logIn;
 
     public AppGUI(Stage stage) {
         this.stage = stage;
@@ -39,21 +38,16 @@ public class AppGUI {
         controlButtons = new ControlButtons();
 
         currentDirectory = new CurrentDirectory();
-        currentDirectory.setDirLabel("Log in to your dropbox account");
+        currentDirectory.setDirLabel("Choose directory..");
         currentDirectory.getDirLabel().setStyle("-fx-font-size: 18px");
 
         fileList = new MultipleTextArea("Files found", "Statistics");
         fileList.initMultipleTextArea();
 
         chooseDir = new Button("Choose directory");
-        chooseDir.setDisable(true);
-        logIn = new Button("Log In");
-
-        HBox buttons = new HBox(215);
-        buttons.getChildren().addAll(chooseDir, logIn);
 
         main.getChildren().addAll(controlButtons.getControlButtons(), currentDirectory.getDirLabel(),
-                fileList.getMultipleTextArea(), buttons);
+                fileList.getMultipleTextArea(), chooseDir);
         VBox.setMargin(controlButtons.getControlButtons(), new Insets(-15, -15, 0, 0));
         VBox.setMargin(fileList.getMultipleTextArea(), new Insets(15, 25, 25, 25));
 
@@ -95,5 +89,4 @@ public class AppGUI {
         return currentDirectory;
     }
 
-    public Button getLogIn() { return logIn; }
 }

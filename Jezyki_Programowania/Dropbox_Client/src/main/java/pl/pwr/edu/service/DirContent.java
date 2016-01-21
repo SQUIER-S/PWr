@@ -1,5 +1,8 @@
 package pl.pwr.edu.service;
 
+import com.dropbox.core.DbxEntry;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,22 +13,22 @@ import java.util.ArrayList;
  */
 public class DirContent {
 
-    private ArrayList<String> dirContent;
+    private ArrayList<File> dirContent;
     private String dir;
 
     public DirContent(String dir) {
         this.dir = dir;
     }
 
-    public ArrayList<String> getDirContent() {
+    public ArrayList<File> getDirContent() {
         return dirContent;
     }
 
-    public ArrayList<String> dirContentToArray() throws IOException {
+    public ArrayList<File> dirContentToArray() throws IOException {
         dirContent = new ArrayList<>();
         Files.walk(Paths.get(dir)).forEach(filePath -> {
             if(Files.isRegularFile(filePath)) {
-                dirContent.add(filePath.getFileName().toString());
+                dirContent.add(filePath.toFile());
             }
         });
 

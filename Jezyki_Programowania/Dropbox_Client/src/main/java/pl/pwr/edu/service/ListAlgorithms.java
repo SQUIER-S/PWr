@@ -1,5 +1,6 @@
 package pl.pwr.edu.service;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -7,11 +8,13 @@ import java.util.ArrayList;
  */
 public class ListAlgorithms {
 
-    public static boolean compareLists(ArrayList<String> first, ArrayList<String> second) {
+    public static boolean compareLists(ArrayList<File> first, ArrayList<File> second) {
         if(first.size() != second.size()) return false;
 
         for(int i = 0; i < first.size(); i++) {
-            if( !(first.get(i).equals(second.get(i))) ) return false;
+            if( !(first.get(i).equals(second.get(i))) ) {
+                return false;
+            }
         }
 
         return true;
