@@ -26,8 +26,6 @@ public class StatsController implements Runnable{
             chef.getAppGUI().getFileList().getRight().setText(filesSend+"\n\n"
                     + filesPerSec+"\n\n" + filesLastTenMinutes);
 
-            System.out.println(Statistics.FILES_PER_SEC);
-
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
